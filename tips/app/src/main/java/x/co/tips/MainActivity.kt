@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         btn.setOnClickListener { view: View ->
             // start up a new activity
-            Log.i("MainActivity", "Action Listener called")
+            Log.d("MainActivity", "Action Listener called")
             buttonFragmentTest(view)
             //val intent = Intent(requireContext(), Gu1Activity::class.java)
             //requireContext().startActivity(intent)
@@ -27,12 +27,14 @@ class MainActivity : AppCompatActivity() {
 
     // the action is linked to button in the layout XML
     fun buttonGridViewTest(view: View) {
-        Log.i("MainActivity", "button grid view test clicked")
+        Log.d("MainActivity", "button grid view test clicked")
+        val intent = Intent(this, GridView1Activity::class.java)
+        startActivity(intent)
     }
 
     fun buttonFragmentTest(view: View)
     {
-        Log.i("MainActivity", "button fragment test clicked")
+        Log.d("MainActivity", "button fragment test clicked")
         val intent = Intent(this, FragActivity1::class.java)
         startActivity(intent)
     }
