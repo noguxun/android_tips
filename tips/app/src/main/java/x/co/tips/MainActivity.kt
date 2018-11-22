@@ -35,7 +35,14 @@ class MainActivity : AppCompatActivity() {
     fun buttonFragmentTest(view: View)
     {
         Log.d("MainActivity", "button fragment test clicked")
-        val intent = Intent(this, FragActivity1::class.java)
+        val intent = Intent(this, Frag1Activity::class.java)
+        startActivity(intent)
+    }
+
+    fun buttonSearchTest(view: View)
+    {
+        Log.d("MainActivity", "button search test clicked")
+        val intent = Intent(this, SearchView1Activity::class.java)
         startActivity(intent)
     }
 

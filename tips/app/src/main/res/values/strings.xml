@@ -2,4 +2,5 @@
     <string name="app_name">Tips</string>
     <string name="grid_view_test">Grid View Test Activity</string>
     <string name="fragment_test">Fragment Test Activity</string>
+    <string name="search_test">Search Test Activity</string>
 </resources>

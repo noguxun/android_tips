@@ -12,13 +12,13 @@ class GridView1Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grid_view1)
 
-        // Set the grid view adapter
+        // Set the grid view adapterMonth
 
         val gridView = findViewById(R.id.grid_view) as GridView
 
 
-        gridView.adapter = ColorBaseAdapter()
-        // or grid_view.adapter
+        gridView.adapter = ColorGridAdapter()
+        // or grid_view.adapterMonth
 
         // Configure the grid view
         grid_view.numColumns = 2

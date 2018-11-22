@@ -13,7 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 
 
-class ColorBaseAdapter : BaseAdapter (){
+class ColorGridAdapter : BaseAdapter() {
     private val list = colors()
 
     /*
@@ -30,7 +30,7 @@ class ColorBaseAdapter : BaseAdapter (){
         // Inflate the custom view
         val inflater = parent?.context?.
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.custom_view,null)
+        val view = inflater.inflate(R.layout.color_item,null)
 
         // Get the custom view widgets reference
         val tv = view.findViewById<TextView>(R.id.tv_name)
@@ -72,7 +72,7 @@ class ColorBaseAdapter : BaseAdapter (){
             Get the data item associated with the specified position in the data set.
 
         Parameters
-            position int : Position of the item whose data we want within the adapter's data set.
+            position int : Position of the item whose data we want within the adapterMonth's data set.
         Returns
             Object : The data at the specified position.
     */
@@ -89,7 +89,7 @@ class ColorBaseAdapter : BaseAdapter (){
             Get the row id associated with the specified position in the list.
 
         Parameters
-            position int : The position of the item within the adapter's data
+            position int : The position of the item within the adapterMonth's data
                            set whose row id we want.
         Returns
             long : The id of the item at the specified position.
