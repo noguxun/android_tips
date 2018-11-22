@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.databinding.DataBindingUtil
 import android.widget.Filter
-import x.co.tips.databinding.RowItemBinding
+import x.co.tips.databinding.MonthItemBinding
 
 
 
@@ -45,11 +45,11 @@ class MonthListAdapter : BaseAdapter(), Filterable {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         }*/
         //val rowItemBinding : RowItemBinding = DataBindingUtil.inflate(inflater, R.layout.month_item, parent, false)
-        val rowItemBinding = DataBindingUtil.inflate(inflater, R.layout.month_item, null, false) as RowItemBinding
-        rowItemBinding.stringName.text = mData[position]
+        val monthItemBinding = DataBindingUtil.inflate(inflater, R.layout.month_item, null, false) as MonthItemBinding
+        monthItemBinding.stringName.text = mData[position]
 
 
-        return rowItemBinding.root
+        return monthItemBinding.root
     }
 
     override fun getFilter(): Filter {
