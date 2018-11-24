@@ -8,7 +8,7 @@ class T1FragActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.frag1_activity_activity)
+        setContentView(R.layout.t1_frag_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, T1FragActivityFragment.newInstance())

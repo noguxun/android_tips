@@ -30,7 +30,7 @@ class T2ColorGridAdapter : BaseAdapter() {
         // Inflate the custom view
         val inflater = parent?.context?.
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.color_item,null)
+        val view = inflater.inflate(R.layout.t2_color_item, null)
 
         // Get the custom view widgets reference
         val tv = view.findViewById<TextView>(R.id.tv_name)

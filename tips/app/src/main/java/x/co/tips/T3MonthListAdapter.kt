@@ -9,7 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.Toast
-import x.co.tips.databinding.MonthItemBinding
+import x.co.tips.databinding.T3MonthItemBinding
 
 
 class T3MonthListAdapter : BaseAdapter(), Filterable {
@@ -44,8 +44,9 @@ class T3MonthListAdapter : BaseAdapter(), Filterable {
             inflater = parent.context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         }*/
-        //val rowItemBinding : RowItemBinding = DataBindingUtil.inflate(inflater, R.layout.month_item, parent, false)
-        val monthItemBinding = DataBindingUtil.inflate(inflater, R.layout.month_item, null, false) as MonthItemBinding
+        //val rowItemBinding : RowItemBinding = DataBindingUtil.inflate(inflater, R.layout.t3_month_item, parent, false)
+        val monthItemBinding =
+            DataBindingUtil.inflate(inflater, R.layout.t3_month_item, null, false) as T3MonthItemBinding
         monthItemBinding.stringName.text = mData[position]
 
         monthItemBinding.root.setOnClickListener{

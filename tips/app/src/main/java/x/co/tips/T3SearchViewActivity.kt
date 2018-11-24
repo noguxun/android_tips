@@ -4,19 +4,19 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
-import x.co.tips.databinding.ActivitySearchView1Binding
+import x.co.tips.databinding.T3ActivitySearchViewBinding
 
 
 class T3SearchViewActivity : AppCompatActivity() {
 
-    lateinit var activitySearchBinding: ActivitySearchView1Binding
+    lateinit var activitySearchBinding: T3ActivitySearchViewBinding
     lateinit var adapterT3Month: T3MonthListAdapter
 
     private var arrayList: MutableList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activitySearchBinding = DataBindingUtil.setContentView(this, R.layout.activity_search_view1)
+        activitySearchBinding = DataBindingUtil.setContentView(this, R.layout.t3_activity_search_view)
 
         arrayList.add("January")
         arrayList.add("February")

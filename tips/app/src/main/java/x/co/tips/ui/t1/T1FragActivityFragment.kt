@@ -20,7 +20,7 @@ class T1FragActivityFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.frag1_activity_fragment, container, false)
+        return inflater.inflate(R.layout.t1_frag_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
