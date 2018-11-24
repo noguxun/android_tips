@@ -16,11 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Frag1Activity">
+        <activity android:name=".T1FragActivity">
         </activity>
-        <activity android:name=".GridView1Activity">
+        <activity android:name=".T2GridViewActivity">
         </activity>
-        <activity android:name=".SearchView1Activity">
+        <activity android:name=".T3SearchViewActivity">
         </activity>
     </application>
 

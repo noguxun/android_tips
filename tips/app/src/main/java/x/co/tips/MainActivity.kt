@@ -1,8 +1,8 @@
 package x.co.tips
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -28,21 +28,21 @@ class MainActivity : AppCompatActivity() {
     // the action is linked to button in the layout XML
     fun buttonGridViewTest(view: View) {
         Log.d("MainActivity", "button grid view test clicked")
-        val intent = Intent(this, GridView1Activity::class.java)
+        val intent = Intent(this, T2GridViewActivity::class.java)
         startActivity(intent)
     }
 
     fun buttonFragmentTest(view: View)
     {
         Log.d("MainActivity", "button fragment test clicked")
-        val intent = Intent(this, Frag1Activity::class.java)
+        val intent = Intent(this, T1FragActivity::class.java)
         startActivity(intent)
     }
 
     fun buttonSearchTest(view: View)
     {
         Log.d("MainActivity", "button search test clicked")
-        val intent = Intent(this, SearchView1Activity::class.java)
+        val intent = Intent(this, T3SearchViewActivity::class.java)
         startActivity(intent)
     }
 

@@ -1,19 +1,18 @@
 package x.co.tips
 
 import android.content.Context
-import android.widget.BaseAdapter
-import android.widget.Filterable
+import android.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.databinding.DataBindingUtil
+import android.widget.BaseAdapter
 import android.widget.Filter
+import android.widget.Filterable
 import android.widget.Toast
 import x.co.tips.databinding.MonthItemBinding
 
 
-
-class MonthListAdapter : BaseAdapter(), Filterable {
+class T3MonthListAdapter : BaseAdapter(), Filterable {
     lateinit var mData: List<String>
     lateinit var mStringFilterList: List<String>
     private var valueFilter: ValueFilter? = null
@@ -51,7 +50,7 @@ class MonthListAdapter : BaseAdapter(), Filterable {
 
         monthItemBinding.root.setOnClickListener{
 
-            Toast.makeText(parent?.context, "Clicked: ${mData[position]}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(parent.context, "Clicked: ${mData[position]}", Toast.LENGTH_SHORT).show()
         }
 
         return monthItemBinding.root

@@ -1,4 +1,4 @@
-package x.co.tips.ui.fragactivity1
+package x.co.tips.ui.t1
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import x.co.tips.R
 
-class FragActivity1Fragment : Fragment() {
+class T1FragActivityFragment : Fragment() {
 
     companion object {
-        fun newInstance() = FragActivity1Fragment()
+        fun newInstance() = T1FragActivityFragment()
     }
 
-    private lateinit var viewModel: FragActivity1ViewModel
+    private lateinit var fragActivityViewModel: T1FragActivityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +25,7 @@ class FragActivity1Fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FragActivity1ViewModel::class.java)
+        fragActivityViewModel = ViewModelProviders.of(this).get(T1FragActivityViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

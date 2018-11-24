@@ -1,7 +1,7 @@
-package x.co.tips.ui.fragactivity1
+package x.co.tips.ui.t1
 
 import android.arch.lifecycle.ViewModel
 
-class FragActivity1ViewModel : ViewModel() {
+class T1FragActivityViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

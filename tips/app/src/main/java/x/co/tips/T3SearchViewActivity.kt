@@ -1,17 +1,16 @@
 package x.co.tips
 
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import x.co.tips.databinding.ActivitySearchView1Binding
 
 
-
-class SearchView1Activity : AppCompatActivity() {
+class T3SearchViewActivity : AppCompatActivity() {
 
     lateinit var activitySearchBinding: ActivitySearchView1Binding
-    lateinit var adapterMonth: MonthListAdapter
+    lateinit var adapterT3Month: T3MonthListAdapter
 
     private var arrayList: MutableList<String> = ArrayList()
 
@@ -32,9 +31,9 @@ class SearchView1Activity : AppCompatActivity() {
         arrayList.add("November")
         arrayList.add("December")
 
-        adapterMonth = MonthListAdapter()
-        adapterMonth.setList(arrayList)
-        activitySearchBinding.listView.adapter = adapterMonth
+        adapterT3Month = T3MonthListAdapter()
+        adapterT3Month.setList(arrayList)
+        activitySearchBinding.listView.adapter = adapterT3Month
 
         activitySearchBinding.search.isActivated = true
         activitySearchBinding.search.queryHint = "Type your keyword here"
@@ -49,7 +48,7 @@ class SearchView1Activity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String): Boolean {
 
-                adapterMonth.filter.filter(newText)
+                adapterT3Month.filter.filter(newText)
 
                 return false
             }
