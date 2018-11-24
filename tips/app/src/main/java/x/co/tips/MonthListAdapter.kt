@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.databinding.DataBindingUtil
 import android.widget.Filter
+import android.widget.Toast
 import x.co.tips.databinding.MonthItemBinding
 
 
@@ -48,6 +49,10 @@ class MonthListAdapter : BaseAdapter(), Filterable {
         val monthItemBinding = DataBindingUtil.inflate(inflater, R.layout.month_item, null, false) as MonthItemBinding
         monthItemBinding.stringName.text = mData[position]
 
+        monthItemBinding.root.setOnClickListener{
+
+            Toast.makeText(parent?.context, "Clicked: ${mData[position]}", Toast.LENGTH_SHORT).show()
+        }
 
         return monthItemBinding.root
     }
