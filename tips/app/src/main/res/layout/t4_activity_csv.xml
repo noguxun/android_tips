@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".T4CsvActivity">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/text_view_station_list"/>
+    </FrameLayout>
+</android.support.constraint.ConstraintLayout>

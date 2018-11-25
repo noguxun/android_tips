@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".T3SearchViewActivity">
         </activity>
+        <activity android:name=".T4CsvActivity">
+        </activity>
     </application>
 
 </manifest>

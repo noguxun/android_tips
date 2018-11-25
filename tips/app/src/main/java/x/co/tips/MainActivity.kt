@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +23,12 @@ class MainActivity : AppCompatActivity() {
             buttonFragmentTest(view)
             //val intent = Intent(requireContext(), Gu1Activity::class.java)
             //requireContext().startActivity(intent)
+        }
+
+        button_csv_test.setOnClickListener {
+            Log.d("MainActivity", "button CSV test clicked")
+            val intent = Intent(this, T4CsvActivity::class.java)
+            startActivity(intent)
         }
     }
 
