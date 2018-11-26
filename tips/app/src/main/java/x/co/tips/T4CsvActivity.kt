@@ -35,21 +35,27 @@ class T4CsvActivity : AppCompatActivity() {
         while (true) {
             var line: String? = bufferReader.readLine() ?: break
 
+            count += 1
+
+            if (count == 1) {
+                // skip the first line with title
+                continue
+            }
+
             val cols = line?.split(",")
 
             if (count < maxCount) {
                 cols?.let {
 
-                    val text =
-                        "Coulmn 0 = '" + cols[0] + "', Column 1 = '" + cols[1] + "', Column 2: '" + cols[2] + "'" + "\n"
-                    stationText += text
-                    println(text)
+                    val station = T4Station(cols[2].trim(), cols[9].toDouble(), cols[10].toDouble())
+                    println("${cols[2].trim()} ${cols[9].trim()} ${cols[10].trim()}")
+                    stationText += station.toString() + "\n"
                 }
             } else {
                 break
             }
 
-            count += 1
+
         }
 
         text_view_station_list.text = stationText
