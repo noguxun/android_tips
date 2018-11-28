@@ -4,4 +4,5 @@
     <string name="fragment_test">Fragment Test Activity</string>
     <string name="search_test">Search Test Activity</string>
     <string name="csv_test">CSV Test Activity</string>
+    <string name="start_station_service">Start Station Service</string>
 </resources>

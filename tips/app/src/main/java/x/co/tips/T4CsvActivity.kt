@@ -1,5 +1,6 @@
 package x.co.tips
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
@@ -19,6 +20,14 @@ class T4CsvActivity : AppCompatActivity() {
         text_view_station_list.movementMethod = ScrollingMovementMethod()
 
         readStationData()
+
+        button_start_service.setOnClickListener {
+            val serviceIntent = Intent(this, T4StationService::class.java)
+            startService(serviceIntent)
+
+            // for minSdk over 26 we need to use
+            // startForegroundService(serviceIntent)
+        }
     }
 
     private fun readStationData() {

@@ -24,6 +24,14 @@
         </activity>
         <activity android:name=".T4CsvActivity">
         </activity>
+
+        <service
+                android:name=".T4StationService"
+                android:enabled="true"
+                android:exported="false">
+        </service>
     </application>
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
 </manifest>

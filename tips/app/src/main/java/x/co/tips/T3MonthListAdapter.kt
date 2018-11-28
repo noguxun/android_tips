@@ -91,7 +91,6 @@ class T3MonthListAdapter : BaseAdapter(), Filterable {
         ) {
             mData = results.values as List<String>
             notifyDataSetChanged()
-        }
-
+        }       
     }
 }
