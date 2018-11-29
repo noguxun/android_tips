@@ -1,7 +1,11 @@
 package x.co.tips
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import kotlinx.android.synthetic.main.t4_activity_csv.*
@@ -20,6 +24,8 @@ class T4CsvActivity : AppCompatActivity() {
         text_view_station_list.movementMethod = ScrollingMovementMethod()
 
         readStationData()
+
+        checkLocationPermission()
 
         button_start_service.setOnClickListener {
             val serviceIntent = Intent(this, T4StationService::class.java)
@@ -42,7 +48,7 @@ class T4CsvActivity : AppCompatActivity() {
         val maxCount = 100
 
         while (true) {
-            var line: String? = bufferReader.readLine() ?: break
+            val line: String? = bufferReader.readLine() ?: break
 
             count += 1
 
@@ -68,5 +74,37 @@ class T4CsvActivity : AppCompatActivity() {
         }
 
         text_view_station_list.text = stationText
+    }
+
+    private fun checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                applicationContext,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                println("Should Show Request Permisson Rationale")
+
+            } else {
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0
+                )
+
+            }
+        } else {
+            println("permission already granted")
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            println("granted")
+
+        } else {
+            println("Please allow the permission")
+        }
     }
 }
