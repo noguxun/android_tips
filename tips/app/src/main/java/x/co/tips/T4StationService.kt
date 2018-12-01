@@ -77,7 +77,9 @@ class T4StationService : Service() {
             .setCategory(Notification.CATEGORY_SERVICE)
             .build()
 
-        Thread(MyRunnable()).start()
+        //Thread(MyRunnable()).start()
+        mLocSer?.getLocation()
+
 
         startForeground(2, notification)
     }
@@ -89,8 +91,8 @@ class T4StationService : Service() {
             setSmallIcon(R.mipmap.ic_launcher)
         }.build()
 
-        Thread(MyRunnable()).start()
-
+        // Thread(MyRunnable()).start()
+        mLocSer?.getLocation()
 
         println("Start Fore Ground")
         startForeground(1, notification)
@@ -103,9 +105,8 @@ class T4StationService : Service() {
             val message = mHandler?.obtainMessage(1)
             message?.sendToTarget()
 
-
             (0..15).map {
-                println("about to sleep in below 26")
+                println("about to sleep")
                 Thread.sleep(1000)
             }
 
@@ -126,65 +127,68 @@ class T4StationService : Service() {
 
 
         fun getLocation() {
-
-
             // getting GPS status
-            val isGPSEnabled = mLocationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER) ?: false
+            val isGpsEnabled = mLocationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER) ?: false
 
             // getting network status
             val isNetworkEnabled = mLocationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER) ?: false
 
-            if (!isGPSEnabled && !isNetworkEnabled) {
+            if (!isGpsEnabled && !isNetworkEnabled) {
                 println("Location GPS or Network are not available")
                 return
             }
 
-            if (isNetworkEnabled) {
+            val minTime = 1000 * 2L
+            val minDistance = 10.0f
 
+            if (isNetworkEnabled) {
                 try {
                     mLocationManager?.requestLocationUpdates(
                         LocationManager.NETWORK_PROVIDER,
-                        1000 * 60 * 1,
-                        1000 * 60 * 1.0f, this
+                        minTime,
+                        minDistance,
+                        this
                     )
-
-                    if (mLocationManager != null) {
-                        val location = mLocationManager?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-
-                        println("onLocationChanged ${location?.latitude} ${location?.longitude}")
-                    }
-
-                    println("Network Location")
+                    val location = mLocationManager?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    println("Network RequestLocation Last Known,  ${location?.latitude} ${location?.longitude}")
                 } catch (e: SecurityException) {
                     println("Security Failed")
                 }
             } else {
-
                 println("Network Location not available")
+            }
+
+            if (isGpsEnabled) {
+                try {
+                    mLocationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, this)
+                    val location = mLocationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    println("GPS RequestLocation Last Known ${location?.latitude} ${location?.longitude}")
+                } catch (e: SecurityException) {
+                    println("Security Failed")
+                }
             }
         }
 
         override fun onLocationChanged(location: Location?) {
-
             try {
-                val location = mLocationManager?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                //var location = mLocationManager?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                println("in getLocation Network ${location?.latitude} ${location?.longitude}")
 
-                println("in getLocation ${location?.latitude} ${location?.longitude}")
+                //
+                println("in getLocation GPS ${location?.latitude} ${location?.longitude}")
             } catch (e: SecurityException) {
                 println("Security Failed")
             }
         }
 
         override fun onProviderDisabled(provider: String?) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
         override fun onProviderEnabled(provider: String?) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         }
 
     }
