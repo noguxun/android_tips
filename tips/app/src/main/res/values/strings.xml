@@ -4,5 +4,7 @@
     <string name="fragment_test">Fragment Test Activity</string>
     <string name="search_test">Search Test Activity</string>
     <string name="csv_test">CSV Test Activity</string>
-    <string name="start_station_service">Start Station Service</string>
+    <string name="start_station_service1">Start Station Service1</string>
+    <string name="bind_station_service2">Bind Station Service2</string>
+    <string name="get_loc_station_service2">Get Location Station Service2</string>
 </resources>

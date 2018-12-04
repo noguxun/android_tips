@@ -11,26 +11,20 @@ import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 
 
 class T4StationService : Service() {
 
     var mLocSer: LocationService? = null
-    var mHandler: MyHandler? = null
 
-    inner class MyHandler(looper: Looper) : Handler(looper) {
 
-        override fun handleMessage(msg: Message?) {
-            super.handleMessage(msg)
-            mLocSer?.getLocation()
-        }
-    }
-
-    override fun onBind(intent: Intent): IBinder {
-        TODO("Return the communication channel to the service.")
+    override fun onBind(intent: Intent): IBinder? {
         println("onBind is called T4 Service, return NULL")
+        return null
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -53,7 +47,6 @@ class T4StationService : Service() {
         super.onCreate()
 
         println("service onCreate")
-        mHandler = MyHandler(Looper.getMainLooper())
         mLocSer = LocationService()
         mLocSer?.prepare()
 
@@ -77,7 +70,6 @@ class T4StationService : Service() {
             .setCategory(Notification.CATEGORY_SERVICE)
             .build()
 
-        //Thread(MyRunnable()).start()
         mLocSer?.getLocation()
 
 
@@ -91,28 +83,10 @@ class T4StationService : Service() {
             setSmallIcon(R.mipmap.ic_launcher)
         }.build()
 
-        // Thread(MyRunnable()).start()
         mLocSer?.getLocation()
 
         println("Start Fore Ground")
         startForeground(1, notification)
-    }
-
-    // inner is required to access outter class method
-    inner class MyRunnable : Runnable {
-
-        override fun run() {
-            val message = mHandler?.obtainMessage(1)
-            message?.sendToTarget()
-
-            (0..15).map {
-                println("about to sleep")
-                Thread.sleep(1000)
-            }
-
-            println("stopForeground")
-            stopForeground(true)
-        }
     }
 
     inner class LocationService : LocationListener {
@@ -182,15 +156,16 @@ class T4StationService : Service() {
         }
 
         override fun onProviderDisabled(provider: String?) {
+
         }
 
         override fun onProviderEnabled(provider: String?) {
+
         }
 
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
 
         }
-
     }
 
 }

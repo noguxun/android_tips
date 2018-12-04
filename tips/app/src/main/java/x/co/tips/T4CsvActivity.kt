@@ -1,9 +1,13 @@
 package x.co.tips
 
 import android.Manifest
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.IBinder
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -16,6 +20,26 @@ import java.nio.charset.Charset
 
 class T4CsvActivity : AppCompatActivity() {
 
+    var stationService2: T4StationService2? = null
+
+    private val service2Connection = object : ServiceConnection {
+        override fun onServiceConnected(
+            className: ComponentName,
+            service: IBinder
+        ) {
+            val binder = service as T4StationService2.MyLocalBinder
+            stationService2 = binder.getService()
+
+            println("Service2 connected")
+            println("${stationService2?.getMyMagicNum()}")
+        }
+
+        override fun onServiceDisconnected(name: ComponentName) {
+            stationService2 = null
+            println("Service2 disconnected")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.t4_activity_csv)
@@ -27,12 +51,20 @@ class T4CsvActivity : AppCompatActivity() {
 
         checkLocationPermission()
 
-        button_start_service.setOnClickListener {
+        button_start_service1.setOnClickListener {
             val serviceIntent = Intent(this, T4StationService::class.java)
             startService(serviceIntent)
+        }
 
-            // for minSdk over 26 we need to use
-            // startForegroundService(serviceIntent)
+        // example to bind service
+        button_bind_service2.setOnClickListener {
+            println("about to bind service2")
+            val intent = Intent(this, T4StationService2::class.java)
+            bindService(intent, service2Connection, Context.BIND_AUTO_CREATE)
+        }
+
+        button_get_loc_service2.setOnClickListener {
+            stationService2?.getLastLocation()
         }
     }
 
