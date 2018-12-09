@@ -6,14 +6,18 @@ import android.content.Intent
 import android.location.Location
 import android.os.Binder
 import android.os.IBinder
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
 
 // https://developer.android.com/training/location/receive-location-updates
+// https://github.com/googlesamples/android-play-location/tree/master/LocationUpdatesForegroundService
 class T4StationService2 : Service() {
 
     private val myBinder = MyLocalBinder()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
+
 
 
     override fun onBind(intent: Intent): IBinder {
@@ -51,5 +55,27 @@ class T4StationService2 : Service() {
                 println("location ${location?.latitude} ${location?.longitude}")
             }
     }
+
+    @SuppressLint("MissingPermission")
+    fun createLocationRequest() {
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for (location in locationResult.locations){
+                    println("google location ${location.longitude} ${location.latitude}")
+                }
+            }
+        }
+
+        val locationRequest = LocationRequest().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+    }
+
 
 }

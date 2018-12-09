@@ -1,10 +1,8 @@
 package x.co.tips
 
 import android.Manifest
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
+import android.annotation.SuppressLint
+import android.content.*
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
@@ -12,6 +10,9 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.t4_activity_csv.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -64,7 +65,61 @@ class T4CsvActivity : AppCompatActivity() {
         }
 
         button_get_loc_service2.setOnClickListener {
-            stationService2?.getLastLocation()
+            // stationService2?.getLastLocation()
+            // stationService2?.createLocationRequest()
+            // stationService2?.createLocationRequest()
+            createLocationRequest()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun createLocationRequest() {
+        /*
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for (location in locationResult.locations){
+                    println("google location ${location.longitude} ${location.latitude}")
+                }
+            }
+        }*/
+
+        val locationRequest = LocationRequest().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+
+        val client: SettingsClient = LocationServices.getSettingsClient(this)
+        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+
+
+        task.addOnSuccessListener { locationSettingsResponse ->
+            // All location settings are satisfied. The client can initialize
+            // location requests here.
+            // fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+            println("settiong ok")
+            stationService2?.createLocationRequest()
+        }
+
+        task.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException){
+                println("settiong failure")
+                // https://developer.android.com/training/location/change-location-settings
+                try {
+                    // Show the dialog by calling startResolutionForResult(),
+                    // and check the result in onActivityResult().
+                    exception.startResolutionForResult(this@T4CsvActivity, 0x1)
+
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    // Ignore the error.
+                }
+
+            }
         }
     }
 
